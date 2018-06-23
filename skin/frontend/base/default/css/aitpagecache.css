@@ -1,0 +1,19 @@
+.aitoc-aitpagecache-loading-effect
+{	
+	z-index:1500;
+	background-image: url(../images/aitoc-aitpagecache-ajax-loader.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: white;
+	position: absolute;
+	opacity: 0.5
+	-moz-opacity: 0.4;
+	opacity:.40;
+	filter: alpha(opacity=40);
+	
+}
+
+.aitoc-aitpagecache-loadable-block
+{
+	visibility: hidden;	
+}

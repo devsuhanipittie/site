@@ -1,0 +1,20 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<?php
+$_element = $this->getElement();
+$_note    = $_element->getNote();
+$_trId    = $_element->getHtmlContainerId();
+$_class   = $_element->getFieldsetHtmlClass();
+?>
+<?php if (!$_element->getNoDisplay()): ?>
+<?php echo $_element->getLabelHtml() ?>
+<?php echo $_element->getElementHtml() ?>
+<?php endif; ?>

@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <payment>
+          <groups>
+            <amzpay translate="label">
+                <label>Amazon Pay</label>
+                <frontend_type>text</frontend_type>
+                <sort_order>10</sort_order>
+                <show_in_default>1</show_in_default>
+                <show_in_website>1</show_in_website>
+                <show_in_store>1</show_in_store>
+                <fields>
+                    <active translate="label">
+                        <label>Enabled</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>10</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </active>
+                    <title translate="label">
+                        <label>Title</label>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry</validate>
+                        <sort_order>20</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </title>
+                    <merchantId translate="label">
+                        <label>Merchant Id</label>
+                        <comment>**Required (Your amazon merchant Id) **</comment>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry</validate>
+                        <sort_order>30</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </merchantId>
+                    <accessKey translate="label">
+                        <label>Access Key</label>
+                        <comment>**Required (Your amazon Access key)**</comment>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry</validate>
+                        <sort_order>40</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </accessKey>
+                    <secretKey translate="label">
+                        <label>Secret Key</label>
+                        <comment>**Required (Your amazon Secret key)**</comment>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry</validate>
+                        <sort_order>50</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </secretKey>                    
+                    <!-- <allowspecific translate="label">
+                        <label>Payment Applicable From</label>
+                        <frontend_type>select</frontend_type>
+                        <sort_order>60</sort_order>
+                        <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </allowspecific>
+                    <specificcountry translate="label">
+                        <label>Countries Payment Applicable From</label>
+                        <frontend_type>multiselect</frontend_type>
+                        <sort_order>70</sort_order>
+                        <source_model>adminhtml/system_config_source_country</source_model>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </specificcountry> -->
+                    <order_status translate="label">
+                        <label>Default Order Status</label>
+                        <frontend_type>select</frontend_type>
+                        <validate>required-entry</validate>
+                        <source_model>amzpay/system_config_source_state</source_model>
+                        <sort_order>60</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </order_status>
+                    <order_status_after translate="label">
+                        <label>After Payment Order Status</label>
+                        <frontend_type>select</frontend_type>
+                        <validate>required-entry</validate>
+                        <source_model>amzpay/system_config_source_state</source_model>
+                        <sort_order>70</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </order_status_after>
+                    <order_invoice translate="label">
+                        <label>Generate Invoice</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>80</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </order_invoice>
+                    <mode translate="label">
+                        <label>Payment Mode</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>amzpay/system_config_source_mode</source_model>
+                        <sort_order>90</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </mode>
+                    <sort_order translate="label">
+                        <label>Sort order</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>100</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </sort_order>
+                    <allow_ips translate="label">
+                        <label>Enable for specific IPs</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>110</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                        <comment>Pass multiple ips , separated</comment>
+                    </allow_ips>
+                    <enable_timeout translate="label">
+                        <label>Enable Timeout</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>115</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </enable_timeout>
+                    <cancel_time translate="label">
+                        <label>Transaction Timeout (in seconds)</label>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry  validate-number validate-digits validate-digits-range digits-range-1-99999</validate>
+                        <sort_order>120</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <comment>In seconds </comment>
+                        <depends><enable_timeout>1</enable_timeout></depends>
+                    </cancel_time>
+                    <redirect_userurl translate="label">
+                        <label>Redirect URL (On Success)</label>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry</validate>
+                        <sort_order>130</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </redirect_userurl>
+                    <!-- <retry_payment translate="label">
+                        <label>Retry Payment Template</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_email_template</source_model>
+                        <sort_order>121</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </retry_payment>
+                    <exclusion_product translate="label">
+                        <label>Product exclusion</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>130</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <comment>Comma(,) Separated</comment>
+                        <depends><active>1</active></depends>
+                    </exclusion_product>
+                    <exclusion_category translate="label">
+                        <label>Category exclusion</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>140</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <comment>Comma(,) Separated</comment>
+                        <depends><active>1</active></depends>
+                    </exclusion_category> -->
+                    <enable_cron translate="label">
+                        <label>Enable Cron</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>140</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </enable_cron>
+                    <cron_time translate="label">
+                        <label>Cron Processing Time (in minutes)</label>
+                        <frontend_type>text</frontend_type>
+                        <validate>required-entry  validate-number validate-digits validate-digits-range digits-range-1-99999</validate>
+                        <sort_order>145</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <comment>In minutes </comment>
+                        <depends><enable_cron>1</enable_cron></depends>
+                    </cron_time>
+                    <write_log translate="label">
+                        <label>Enable logging</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <sort_order>150</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <depends><active>1</active></depends>
+                    </write_log>
+                    <ipn_haldler translate="label">
+                        <label>IPN handler url</label>
+                        <frontend_model>amzpay/adminhtml_system_config_form_field_disable</frontend_model>
+                        <attribute type="disabled">1</attribute>
+                        <attribute type="value">1</attribute>
+                        <validate>required-entry</validate>
+                        <sort_order>180</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </ipn_haldler>
+                    <whitelist_url translate="label">
+                        <label>Whitelist url</label>
+                        <frontend_model>amzpay/adminhtml_system_config_form_field_disable</frontend_model>
+                        <attribute type="disabled">1</attribute>
+                        <attribute type="value">1</attribute>
+                        <validate>required-entry</validate>
+                        <sort_order>180</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </whitelist_url>
+                    <api_sign_endpoint translate="label">
+                        <label>Mobile Sign and Encrypt Endpoint</label>
+                        <frontend_model>amzpay/adminhtml_system_config_form_field_disable</frontend_model>
+                        <sort_order>200</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </api_sign_endpoint>
+                    <api_sign_verify_endpoint translate="label">
+                        <label>Mobile verify signature Endpoint</label>
+                        <frontend_model>amzpay/adminhtml_system_config_form_field_disable</frontend_model>
+                        <sort_order>210</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                    </api_sign_verify_endpoint>
+                    <export translate="label">
+                        <label>Download log</label>
+                        <sort_order>260</sort_order>
+                        <type>button</type>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <frontend_model>amzpay/adminhtml_system_config_logbutton</frontend_model>
+                        <comment>Amazon log would be written to 'var/log/ directory with prefix "amazon-".
+                        If Magento log is enabled then log written or download otherwise not written or download.</comment>
+                        <depends><write_log>1</write_log></depends>
+                    </export>
+                </fields>
+            </amzpay>
+          </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<div  class="xreports-filter-container">
+    <div class="xreports-filter entry-edit" id="<?php echo $this->getHtmlId() ?>">
+        <div class="title-container" id="<?php echo $this->getHtmlIdPrefix() ?>title">
+            <div class="title-text">
+                <div class="main-text">
+                    <span class="date"><?php echo $this->getDateForTitle('from'); ?></span> - <span class="date"><?php echo $this->getDateForTitle('to'); ?></span>
+                </div>
+                <div class="sub-text <?php if(!$this->getFilterData()->getCompare()){ echo 'no-display';} ?>">
+                    <?php echo $this->__('Vs.'); ?> <span class="date"><?php echo $this->getDateForTitle('from_compare'); ?></span> - <span class="date"><?php echo $this->getDateForTitle('to_compare'); ?></span>
+                </div>
+            </div>
+        </div>
+        <div id="<?php echo $this->getHtmlIdPrefix() ?>form" class="no-display">
+            <?php echo $this->getFormHtml(); ?>
+            <p class="form-buttons"><?php echo $this->getSubmitButtonHtml(); ?></p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+xreportsFilter = new MWXreportsFilter(
+    '<?php echo $this->getHtmlId() ?>',
+    {
+        display_date_format:    '<?php echo $this->getTitleDateFormat(true); ?>',
+        input_date_format:      '<?php echo $this->getInputDateFormat(true); ?>'
+    }
+);
+//]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    datepickr('#xreports-filter-form-from', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-to', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-from_compare', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-to_compare', { dateFormat: 'm/d/Y'});
+    //]]>
+</script>

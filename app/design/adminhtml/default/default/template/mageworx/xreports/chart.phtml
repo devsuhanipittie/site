@@ -1,0 +1,33 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<?php $js = $this->getChartJs(); ?>
+<?php if ($js) : ?>
+    <?php echo MageWorx_Xreports_Model_Chart_Factory::getChartRendererBlock($this->getRenderId())->toHtml(); ?>
+    <script type="text/javascript">
+<?php echo $js; ?>
+</script>
+<?php endif ?>
+<?php if ($this->isCatalog() === false) : ?>
+    <?php $statsJsMethod = MageWorx_Xreports_Model_Chart_Factory::getStatsJsMethod($this->getRenderId()) ?>
+    <?php $statsJs = $this->$statsJsMethod(); ?>
+    <?php if ($statsJs) : ?>
+        <script type="text/javascript">
+            <?php echo $statsJs; ?>
+        </script>
+    <?php endif; ?>
+<?php else : ?>
+    <?php $statsJs = $this->getCatalogStatsJs(); ?>
+    <?php if ($statsJs) : ?>
+        <script type="text/javascript">
+            <?php echo $statsJs; ?>
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

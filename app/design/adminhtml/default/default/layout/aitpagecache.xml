@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">	
+	<adminhtml_cache_index>
+    	<reference name="cache.additional">
+            <block type="aitpagecache/adminhtml_warmupcache" name="adminhtml.warmupcache" template = "aitpagecache/cache/additional.phtml" />
+        </reference>
+    </adminhtml_cache_index>
+</layout>

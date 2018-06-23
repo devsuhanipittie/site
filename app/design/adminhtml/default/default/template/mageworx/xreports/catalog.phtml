@@ -1,0 +1,30 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<div class="dashboard-tab-container">
+    <span class="dashboard-tab-title"><?php echo $this->__('Periodic Statistics') ?></span>
+    <span class="dashboard-orange-slash">/</span>
+    <?php echo $this->getChildHtml('filter') ?>
+    <?php echo $this->getChildHtml('periodicStats'); ?>
+</div>
+
+<div class="dashboard-tab-separator"></div>
+
+<script type="text/javascript">
+    var activeTabId = "<?= Mage::helper('mageworx_xreports')->getDefaultCatalogTab() ?>";
+    document.getElementById("xreports_tabs_periodic_" + activeTabId).classList.remove('notloaded');
+    document.getElementById("xreports_tabs_periodic_" + activeTabId).classList.add('active');
+    document.getElementById("xreports_tabs_periodic_" + activeTabId + "_content").style.display = 'block';
+    var defaultCatalogActiveTab = document.getElementById('periodic__img-<?= Mage::helper('mageworx_xreports')->getDefaultCatalogTab() ?>');
+    if (defaultCatalogActiveTab != null) {
+        defaultCatalogActiveTab.className = 'periodic-tab-img tab-img-<?= Mage::helper('mageworx_xreports')->getDefaultCatalogTab() ?> active-tab';
+    }
+</script>

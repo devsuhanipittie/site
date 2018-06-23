@@ -1,0 +1,42 @@
+<?php if (Mage::helper('aitpagecache')->isJSLoaderAllowed()) {
+    ?>
+    <script type="text/javascript">
+        //<![CDATA[
+        var loaders = new aitpagecache_Loader({
+            url                 : document.location.href,
+            disableDynamicBlocks: <?php echo (int)Mage::getStoreConfig('aitpagecache/aitpagecache_config_aitloadmon/disable_dynamic_blocks');?>,
+            showPlaceholder     : <?php echo (int)Mage::getStoreConfig('aitpagecache/aitpagecache_config_aitloadmon/show_placeholder');?>,
+            placeholderText     : '<?php echo Mage::getStoreConfig('aitpagecache/aitpagecache_config_aitloadmon/placeholder_text');?>',
+            disabledCacheBlocks : <?php echo $this->getDisabledCacheBlocks();?>
+        });
+        //]]>
+    </script>
+    <?php
+}
+?>
+
+<script>
+    //<![CDATA[
+    function replaceFormKey(addToCartButtons, formKey) {
+        addToCartButtons.forEach(function(button) {
+            var oldLink = button.readAttribute('onclick').split('form_key/')[1].split('/')[0];
+
+            if (oldLink === formKey) {
+                return;
+            }
+
+            var beforeText = button.readAttribute('onclick').split('form_key/')[0];
+            var afterText = button.readAttribute('onclick').split('form_key/')[1].split('/')[1];
+            var newLink = beforeText + "form_key/" + formKey + '/' + afterText;
+            button.writeAttribute('onclick', newLink);
+        });
+    }
+
+    var formKey = '<?php echo $this->getFormKey() ?>';
+
+    var addToCartButtons = $$('.btn-cart');
+    if (addToCartButtons !== undefined) {
+        replaceFormKey(addToCartButtons, formKey);
+    }
+    //]]>
+</script>

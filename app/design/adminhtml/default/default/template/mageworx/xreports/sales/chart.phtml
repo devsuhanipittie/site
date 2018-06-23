@@ -1,0 +1,30 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<div id="xreport" class="sales">
+    <?php if($this->hasTabs()) echo $this->getTabs()->toHtml(); ?>
+</div>
+
+<script>
+    var c = $("xreport");
+    if(c.previousSiblings()[4]){
+        c.previousSiblings()[4].insert({before: c});
+    }
+//    c.remove();
+</script>    
+
+<script type="text/javascript">
+        <?php 
+//            foreach($this->getCharts() as $chart) {
+//                echo $chart;
+//            }
+        ?>
+</script>

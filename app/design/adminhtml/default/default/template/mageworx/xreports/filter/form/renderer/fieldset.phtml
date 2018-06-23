@@ -1,0 +1,34 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<?php $_element = $this->getElement() ?>
+<?php if ($_element->getFieldsetContainerId()): ?>
+<div id="<?php echo $_element->getFieldsetContainerId(); ?>">
+<?php endif; ?>
+<?php if ($_element->getLegend()): ?>
+<div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $_element->getLegend() ?></h4>
+    <div class="form-buttons"><?php echo $_element->getHeaderBar() ?></div>
+</div>
+<?php endif; ?>
+<?php if (!$_element->getNoContainer()): ?>
+    <div class="fieldset <?php echo $_element->getClass() ?>" id="<?php echo $_element->getHtmlId() ?>">
+<?php endif; ?>
+<?php if ($_element->getComment()): ?>
+    <p class="comment"><?php echo $this->escapeHtml($_element->getComment()) ?></p>
+<?php endif; ?>
+<?php echo $_element->getChildrenHtml(); ?>
+<?php echo $_element->getSubFieldsetHtml() ?>
+<?php if (!$_element->getNoContainer()): ?>
+    </div>
+<?php endif; ?>
+<?php if ($_element->getFieldsetContainerId()): ?>
+</div>
+<?php endif; ?>

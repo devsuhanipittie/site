@@ -1,0 +1,42 @@
+<div style="margin-left: auto; margin-right: auto; width: 500px;">
+    <div>
+        <?php echo Mage::getStoreConfig('aitpagecache/aitpagecache_config_aitloadmon/block_text');?>
+    </div>
+    <div style="margin-left: auto; margin-right: auto; width: 157px;">
+        <input type="text" name="email" id="email_field">
+        <input type="submit" value="&rarr;" onclick="sendEmail();">
+    </div>
+</div>
+<script type="text/javascript">
+    function sendEmail()
+    {
+        url = '<?php Mage::getBaseUrl();?>aitpagecache/unavailable/mail';
+        new Ajax.Request(url, {
+            method:'post',
+            parameters: {email:$('email_field').value},
+            onSuccess: function(transport) {
+                alert('<?php echo Mage::helper('aitpagecache')->__('You will be notified you when the site would be available to you again'); ?>');
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+
+        });
+    }
+    function checkLoad()
+    {
+        url = '<?php Mage::getBaseUrl();?>aitpagecache/unavailable/check';
+        new Ajax.Request(url, {
+            method:'get',
+            onSuccess: function(transport) {
+                var allow = parseInt(transport.responseText) || 0;
+                if(allow && confirm('<?php echo Mage::helper('aitpagecache')->__('The site is now available to you. Do you wish to proceed?'); ?>'))
+                {
+                    document.location.reload(true);
+                }
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+        setTimeout(checkLoad,300000);
+    }
+
+    setTimeout(checkLoad,300000);
+</script>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!--/**
+ * @package     Wagento_Directory
+ * @version     1.0.0
+ * @author      Wagento Creative LLC. <support@wagento.com>
+ * @copyright   Copyright © 2016 Wagento Creative LLC.
+ */-->
+<config>
+    <modules>
+        <Wagento_Directory>
+            <version>1.0.0</version>
+        </Wagento_Directory>
+    </modules>
+    <global>
+        <models>
+            <directory>
+                <rewrite>
+                    <currency>Wagento_Directory_Model_Currency</currency>
+                </rewrite>
+            </directory>
+        </models>
+    </global>
+</config>

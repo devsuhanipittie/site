@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">	
+	<default>
+    	<reference name="before_body_end">
+            <block type="aitpagecache/js" name="aitpagecache_js"></block>
+        </reference>        
+		 <reference name="head">
+            <action method="addJs"><script>aitoc/aitpagecache/aitloader.js</script></action>
+            <action method="addCss"><name>css/aitpagecache.css</name></action>
+        </reference>
+        <reference name="header">            
+            <block type="page/html_welcome" name="top.welcome" as="welcome" />
+        </reference>
+    </default>
+</layout>

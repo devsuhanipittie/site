@@ -1,0 +1,22 @@
+<div class="">
+<form method="post" action="<?php echo Mage::helper('adminhtml')->getUrl('msg91/adminhtml_testmessage/test'); ?>" id="sms_form" name="sms_form" autocomplete="off">
+ 	<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+        <h2><?php echo Mage::helper('adminhtml')->__('Test Message') ?></h2>
+        <div class="input-box input-left"><label>Mobile Number</label><br/>
+              <input type="text" id="mobile" name="mobile" value="" class="input-text required-entry validate-digits validate-length maximum-length-10 minimum-length-10" /></div>
+                    <div class="input-box input-right"><label for="login"><?php echo Mage::helper('adminhtml')->__('Message:') ?></label><br />
+                        <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
+                        <input type="text" class="input-text no-display" name="dummy" id="dummy" />
+                        <input type="textarea" id="message" name="message" class="required-entry input-text" value="" /></div>
+                    <?php echo $this->getChildHtml('form.additional.info'); ?>
+                    <div class="clear"></div>
+                    <div class="form-buttons"><br/>
+                        <input type="submit" class="form-button" value="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('adminhtml')->__('Send')) ?>" title="Send" /></div>
+                </div>
+</form>
+
+<script type="text/javascript">
+    //< ![CDATA[
+        var customForm = new Validation('sms_form');
+    //]]>
+</script>

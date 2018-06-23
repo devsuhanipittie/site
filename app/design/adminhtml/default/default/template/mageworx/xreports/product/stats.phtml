@@ -1,0 +1,34 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<div class="dashboard-tab-container">
+    <ul class="catalog-tab-items-container-horiz no-padding">
+        <?php $cnt = count($this->getStats()); $i = 0;?>
+        <?php foreach ($this->getStats() as $stat): $i++;?>
+            <li class="catalog-stats-item">
+                <div class="catalog-stats-item__title"><?php echo $stat->getLabel() ?></div>
+                <div class="catalog-stats-item__value"><?php echo $stat->getCount() ?></div>
+                <?php if($stat->getCorrel() && !is_array($stat->getCorrel())): ?>
+                    <div class="catalog-stats-item__site-total"><?php echo $stat->getCorrel(); echo $this->__('% of Site Total'); ?></div>
+                <?php elseif($stat->getCorrel() && is_array($stat->getCorrel())): ?>
+                    <?php foreach($stat->getCorrel() as $cor): ?>
+                        <?php if($cor['correl']): ?>
+                            <div class="catalog-stats-item__site-total"><?php echo $cor['correl'] . $cor['title'] ?></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+<div class="dashboard-tab-separator"></div>

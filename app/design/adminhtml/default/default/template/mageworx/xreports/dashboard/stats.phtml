@@ -1,0 +1,30 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<ul id="<?php echo $this->getId() ?>" class="dashboard-stat" >
+    <?php $cnt = count($this->getStats()); $i = 0;?>
+    <?php foreach ($this->getStats() as $stat): $i++;?>
+        <li class="dashboard-stat-bloc">
+            <div class="step-name group dashboard-link" >
+                <span class="name" style="float: left;"><?php echo $stat->getLabel() ?></span>
+                <strong class="full-num stat-text"><?php echo $stat->getCount() ?></strong>
+                <br/>
+                <?php if($stat->getCorrel()): ?>
+                    <span class="prev" title="0"></span>
+                    <span class="evo"><?php echo $stat->getCorrel(); echo $this->__('% of Site Total'); ?></span>
+                <?php endif; ?>
+            </div>
+            <?php if($i < $cnt): ?>
+                    <div class="arrow"/>
+            <?php endif; ?>
+
+        </li>
+    <?php endforeach; ?>
+</ul>

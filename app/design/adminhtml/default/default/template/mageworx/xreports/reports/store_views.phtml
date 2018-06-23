@@ -1,0 +1,22 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<div class="entry-edit">
+    <?php echo $this->getFormHtml();?>
+</div>
+<?php echo $this->getChildHtml('form_after');?>
+
+<script type="text/javascript">
+    datepickr('#xreports-filter-form-from', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-to', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-from_compare', { dateFormat: 'm/d/Y'});
+    datepickr('#xreports-filter-form-to_compare', { dateFormat: 'm/d/Y'});
+</script>

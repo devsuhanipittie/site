@@ -1,0 +1,12 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<span class="prev <?php if($this->getRate() < 0):?>down-arrow<?php elseif($this->getRate() > 0):?>up-arrow<?php endif; ?>"><?php if ($this->hasRate()): echo $this->helper('mageworx_xreports/format')->percent($this->getRate()); endif; ?></span>
+<span class="evo"><?php echo $_tab->getCount(); ?></span>

@@ -1,0 +1,106 @@
+"% of Product's Qty Ordered","% of Product's Qty Ordered"
+"% of Site Total","% of Site Total"
+"% of Total Qty Refunded","% of Total Qty Refunded"
+"% of Total Refunds","% of Total Refunds"
+"&quot;key_field&quot; key is mandatory in series configuration.","&quot;key_field&quot; key is mandatory in series configuration."
+AOV,AOV
+"Apply Filter","Apply Filter"
+Attribute,Attribute
+"Attribute Set","Attribute Set"
+"Attribute Value","Attribute Value"
+"Average Quantity","Average Quantity"
+Category,Category
+"Chart renderer block is not set properly.","Chart renderer block is not set properly."
+Compare,Compare
+"Compare From","Compare From"
+"Compare To","Compare To"
+"Conversion Rate","Conversion Rate"
+"Conversion rate","Conversion rate"
+"Creating prices backups (100%)...","Creating prices backups (100%)..."
+"Customer Revenue","Customer Revenue"
+Dashboard,Dashboard
+Date,Date
+Day,Day
+Done,Done
+"Extended Reports","Extended Reports"
+"Extended Reports Statistics","Extended Reports Statistics"
+From,From
+"Invalid Chart renderer block.","Invalid Chart renderer block."
+"Invalid categories data identificator specified.","Invalid categories data identificator specified."
+Invoiced,Invoiced
+"Lifetime Statistics","Lifetime Statistics"
+"MageWorx &gt; Extended Reports","MageWorx &gt; Extended Reports"
+"MageWorx_Xreports_Model_Graph_Data_Collection::_initFromArray(): Invalid array specified.","MageWorx_Xreports_Model_Graph_Data_Collection::_initFromArray(): Invalid array specified."
+"MageWorx_Xreports_Model_Graph_Data_Collection::_initFromSource(): Invalid collection object specified.","MageWorx_Xreports_Model_Graph_Data_Collection::_initFromSource(): Invalid collection object specified."
+"Main Settings","Main Settings"
+Month,Month
+"Order Grid","Order Grid"
+"Order Profit","Order Profit"
+"Order View","Order View"
+"Order profit","Order profit"
+Orders,Orders
+"Parent Category","Parent Category"
+Period,Period
+"Periodic Statistics","Periodic Statistics"
+"Please assign at least one series configuration using addSeriesConfig() method","Please assign at least one series configuration using addSeriesConfig() method"
+"Please call &quot;setFilter()&quot; for the Class %s","Please call &quot;setFilter()&quot; for the Class %s"
+"Prepare Collection data first.","Prepare Collection data first."
+"Prices were reindexed (100%)...","Prices were reindexed (100%)..."
+"Product View","Product View"
+"Product Views","Product Views"
+"Product is not loaded.","Product is not loaded."
+"Produt prices for seleted products will be changed. Are you sure you want to do this?","Produt prices for seleted products will be changed. Are you sure you want to do this?"
+"Produt prices for seleted products will be changed to old prices. Are you sure you want to do this?","Produt prices for seleted products will be changed to old prices. Are you sure you want to do this?"
+Profit,Profit
+Purchases,Purchases
+"Qty Ordered","Qty Ordered"
+"Qty Refunded","Qty Refunded"
+Quantity,Quantity
+"Refresh Statistics","Refresh Statistics"
+Refunded,Refunded
+Reports,Reports
+"Reports &gt; Products &gt; Bestsellers","Reports &gt; Products &gt; Bestsellers"
+"Restore Old Prices","Restore Old Prices"
+Revenue,Revenue
+Sales,Sales
+"Sales Margin, %","Sales Margin, %"
+"Sales Margin cannot be applied","Sales Margin cannot be applied"
+"Sales Total","Sales Total"
+"Sales by Attributes","Sales by Attributes"
+"Sales by Attributes Report","Sales by Attributes Report"
+"Sales by Categories","Sales by Categories"
+"Sales by Categories Report","Sales by Categories Report"
+"Set Sales Margin","Set Sales Margin"
+"Show Report","Show Report"
+"Starting &quot;Apply sales margin&quot;. &lt;span style=&quot;color:red&quot;&gt;Please do not close this window.&lt;/span&gt;","Starting &quot;Apply sales margin&quot;. &lt;span style=&quot;color:red&quot;&gt;Please do not close this window.&lt;/span&gt;"
+Statistics,Statistics
+"Switch Dashboard","Switch Dashboard"
+To,To
+Total,Total
+"Total %1$s, processed %2$s records (%3$s%%)...","Total %1$s, processed %2$s records (%3$s%%)..."
+"Total Profit","Total Profit"
+"Total discount","Total discount"
+"Total income","Total income"
+"Total of %d product price(s) have been restored.","Total of %d product price(s) have been restored."
+"Total of %d product price(s) have been updated.","Total of %d product price(s) have been updated."
+"Total paid","Total paid"
+"Total refunded","Total refunded"
+"Total revenue","Total revenue"
+"Total shipping","Total shipping"
+"Total tax","Total tax"
+"Unable to update products' profit in lifetime statistics.","Unable to update products' profit in lifetime statistics."
+"Unable to update products' profit in recent statistics.","Unable to update products' profit in recent statistics."
+Visits,Visits
+Vs.,Vs.
+Year,Year
+"Store View","Store View"
+"Sales by Store Views Report","Sales by Store Views Report"
+"Sales by Store Views","Sales by Store Views"
+"Enable &quot;Collect Totals&quot; option","Enable &quot;Collect Totals&quot; option"
+"Default Report date range","Default Report date range"
+"Specify the number of Days. If date range is empty the number of days will be calculated based on &quot;Default Report Period&quot; setting","Specify the number of Days. If date range is empty the number of days will be calculated based on &quot;Default Report Period&quot; setting"
+"Default Report Period","Default Report Period"
+"Default Tab on Dashboard Statistics","Default Tab on Dashboard Statistics"
+"Default Tab on Catalog Product Statistics","Default Tab on Catalog Product Statistics"
+"Process Orders","Process Orders"
+"Show profit on","Show profit on"

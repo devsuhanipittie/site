@@ -1,0 +1,19 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<?php echo $this->getChildHtml('tabs'); ?>
+<script type="text/javascript">
+//<![CDATA[
+xreportsDashboard = new MWXreportsDashboard(<?php echo $this->getChild('tabs')->getJsObjectName(); ?>);
+if (typeof(xreportsFilter) != 'undefined') {
+    xreportsFilter.setCallback(xreportsDashboard.applyFilter.bind(xreportsDashboard));
+}
+//]]>
+</script>

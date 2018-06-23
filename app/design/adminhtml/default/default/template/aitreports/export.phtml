@@ -1,0 +1,438 @@
+<?php $_config = $this->getConfig(); ?>
+<?php $_profile = $this->getProfile(); ?>
+<script type="text/javascript">
+//<![CDATA[
+function showOption(select)
+{
+    select = $(select);
+    for (var i = 0, l = select.options.length; i<l; i++) {
+        $$('.'+select.id+'_'+select.options[i].value).each(function (el) {
+            el.select('span.required-optional').each(function(requiredSpan)
+            {
+                requiredSpan.select('input').each(function(requiredInput)
+                {
+                    if (i == select.selectedIndex)
+                    {
+                        requiredInput.addClassName('required-entry');
+                    }
+                    else
+                    {
+                        requiredInput.removeClassName('required-entry');
+                    }
+                });
+            });
+
+            el.style.display = select.selectedIndex==i ? '' : 'none';
+        });
+    }
+
+}
+
+function setDate(select)
+{
+    var dates = {
+        <?php foreach($this->getDateRange() as $key=>$range): ?>
+        <?php echo $key ?>:{start:'<?php echo $range['start'] ?>',end:'<?php echo $range['end']; ?>'},
+        <?php endforeach; ?>
+        alltime:{start:'',end:''},
+        custom:{start:'',end:''}
+    };
+    if(select.value != 'custom') {
+        $('filterDateFrom').value = dates[select.value].start;
+        $('filterDateTo').value = dates[select.value].end;
+    }
+}
+
+function showProfile(select)
+{
+    var name = '<?php echo Mage::helper('aitreports')->__("Default") ?>';
+    if(select.value > 0) {
+        name = $(select).select("option[value='"+select.value+"']");
+        if(name.length == 1) {
+            name = name[0].innerHTML;
+        }
+    }
+    $('profileNewName').value = name;
+}
+
+//]]>
+</script>
+
+<div id="profile-generator" class="entry-edit profile-generator">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitreports')->__("Report Profile information") ?></h4>
+    </div>
+    <fieldset>
+        <legend><?php echo Mage::helper('aitreports')->__("Report Profile") ?></legend>
+        <div class="profile_data_export">
+            <?php if($_profile->getId()): ?>
+            <span class="field-row">
+                <label for="profileSelect"><?php echo Mage::helper('aitreports')->__("Loaded Report Profile:") ?></label>
+                <span><?php echo $_profile->getName() ?></span>
+            </span>
+            <?php endif; ?>
+            <span class="field-row">
+                <label for="profileSelect"><?php echo Mage::helper('aitreports')->__("Report Profile:") ?></label>
+                <select id="profileSelect" name="profile[id]" onchange="showProfile(this)" class="option-control">
+                    <?php foreach($this->getProfileData() as $profile): ?>
+                    <option value="<?php echo $profile->getId() ?>" <?php echo ($_profile->getId() == $profile->getId())? 'selected="selected"':''; ?>><?php echo $profile->getName() ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <button  id="ait_load_profile" title="<?php echo Mage::helper('aitreports')->__("Load Report Profile") ?>" type="button" class="scalable loadProfile" onclick="loadProfile();" style=""><span><span><span><?php echo Mage::helper('aitreports')->__("Load Report Profile") ?></span></span></span></button>
+                <button  id="ait_delete_profile" title="<?php echo Mage::helper('aitreports')->__("Delete Report Profile") ?>" type="button" class="scalable deleteProfile" onclick="deleteProfile();" style=""><span><span><span><?php echo Mage::helper('aitreports')->__("Delete Report Profile") ?></span></span></span></button>
+            </span>
+            <span class="field-row fileProfile-new">
+                <label for="fileFilename"><?php echo Mage::helper('aitreports')->__("Report Profile name:") ?></label>
+                <span class="with-tip">
+                    <input class="input-text" id="profileNewName" name="profile[name]" value="<?php echo $_profile->getId() ? $_profile->getName() : Mage::helper('aitreports')->__("Default") ?>"/>
+                </span>
+            </span>
+            <span class="field-row fileStoreView">
+                <label for="fileFilename"><?php echo Mage::helper('aitreports')->__("Store View") ?></label>
+                <span class="with-tip">
+                    <select id="store_id" name="store" title="Store View" class=" required-entry select">
+                    <?php foreach($this->getStoreViews() as $store): ?>
+                    <?php if(is_array($store['value'])): ?>
+                        <optgroup label="<?php echo $store['label'] ?>">
+                        <?php if(is_array($store['value']) && sizeof($store['value']) > 0): ?>
+                            <?php foreach($store['value'] as $store_view): ?>
+                                <option value="<?php echo $store_view['value'] ?>" <?php echo ($this->getProfile()->getStoreId() == $store_view['value'] ? 'selected="selected"':'') ?>><?php echo $store_view['label'] ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                        <?php echo $store['label'] ?>
+                        <?php endif; ?>
+                        </optgroup>
+                    <?php else: ?>
+                        <option value="<?php echo $store['value'] ?>" <?php echo ($this->getProfile()->getStoreId() == $store['value'] ? 'selected="selected"':'') ?>><?php echo $store['label'] ?></option>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                    </select>
+                </span>
+                
+            </span>
+            <span class="field-row">
+                <?php if($this->isXslExists()) : ?>
+                    <label for="parseXslFile"><?php echo Mage::helper('aitreports')->__('Using file: ') ?></label>
+                    <span style="font-weight: bold;"><?php echo $this->getValue('parse_xsl_file/name'); ?></span>
+                    <input type="hidden" name="parse_xsl_file[name]" value='<?php echo $this->getValue('parse_xsl_file/name'); ?>' />
+                <?php endif; ?>
+            </span>
+            <span class="field-row">
+                <label for="parseXslFile"><?php echo Mage::helper('aitreports')->__("XSL Template File") . ':'; ?><?php if(!$this->isXslExists()) { echo '<span class="required">*</span>'; }?></label>
+                <span class="with-tip">
+                <input type="file" id="parseXslFile" name="parse_xsl_file" value="" <?php if(!$this->isXslExists()) { echo "class='input-file required-entry'"; } ?> />
+                <small>
+                    <?php if(!$this->isXslExists()) : ?>
+                        <?php echo Mage::helper('aitreports')->__('No file selected, report will not be generated.') ?>
+                    <?php endif ?>
+                </small>
+                </span>
+            </span>
+        </div>
+    </fieldset>
+    
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitreports')->__("Order Filters") ?></h4>
+    </div>
+    <fieldset id="filters_container">
+        <legend><?php echo Mage::helper('aitreports')->__("Order Filters") ?></legend>
+        <span class="field-row">
+            <label for="filterOrderstatus"><?php echo Mage::helper('aitreports')->__("Order Status") ?></label>
+            <select id="filterOrderstatus" name="filter[orderstatus]" class="inputElement">
+                <?php foreach ($this->getOrderStatuses() as $item): ?>
+                <option value="<?php echo $item['value'] ?>" <?php echo $this->getSelected('filter/orderstatus', $item['value']) ?>><?php echo $this->htmlEscape($item['label']) ?></option>
+                <?php endforeach ?>
+            </select>
+        </span>
+        <span class="field-row">
+            <label for="filterOrderIdFrom"><?php echo Mage::helper('aitreports')->__("Order #") ?></label>
+            <span class="with-tip">
+            <?php echo Mage::helper('aitreports')->__('From') ?>:&nbsp;<input class="inputElement input-text no-changes" type="text" id="filterOrderIdFrom" name="filter[order_id_from]" 
+                          value="<?php echo $this->getValue('filter/order_id_from') ?>" style="width:5em" /> &nbsp;&nbsp;
+            <?php echo Mage::helper('aitreports')->__('To') ?>:&nbsp;<input  class="inputElement input-text no-changes" type="text" id="filterOrderIdTo" name="filter[order_id_to]"  
+                           value="<?php echo $this->getValue('filter/order_id_to') ?>" style="width:5em" /> &nbsp;&nbsp;
+            </span>
+        </span>
+        <span class="field-row">
+            <label for="filterCustomerIdFrom"><?php echo Mage::helper('aitreports')->__("Orders by Customer ID#") ?></label>
+            <span class="with-tip">
+            <?php echo Mage::helper('aitreports')->__('From') ?>:&nbsp;<input class="inputElement input-text no-changes validate-number" type="text" id="filterCustomerIdFrom" name="filter[customer_id_from]" 
+                          value="<?php echo $this->getValue('filter/customer_id_from') ?>" style="width:5em" /> &nbsp;&nbsp;
+            <?php echo Mage::helper('aitreports')->__('To') ?>:&nbsp;<input  class="inputElement input-text no-changes validate-number" type="text" id="filterCustomerIdTo" name="filter[customer_id_to]"  
+                           value="<?php echo $this->getValue('filter/customer_id_to') ?>" style="width:5em" /> &nbsp;&nbsp;
+            </span>
+        </span>
+        <span class="field-row">
+            <label for="filterProductIdFrom"><?php echo Mage::helper('aitreports')->__("Orders by Product ID#") ?></label>
+            <span class="with-tip">
+            <?php echo Mage::helper('aitreports')->__('From') ?>:&nbsp;<input class="inputElement input-text no-changes validate-number" type="text" id="filterProductIdFrom" name="filter[product_id_from]" 
+                          value="<?php echo $this->getValue('filter/product_id_from') ?>" style="width:5em" /> &nbsp;&nbsp;
+            <?php echo Mage::helper('aitreports')->__('To') ?>:&nbsp;<input  class="inputElement input-text no-changes validate-number" type="text" id="filterProductIdTo" name="filter[product_id_to]"  
+                           value="<?php echo $this->getValue('filter/product_id_to') ?>" style="width:5em" /> &nbsp;&nbsp;
+            </span>
+        </span>
+        <span class="field-row">
+            <label for="profileSelect"><?php echo Mage::helper('aitreports')->__("Range:") ?></label>
+            <select id="filterRange" name="filter[range]" onchange="setDate(this)" class="option-control">
+                <?php foreach($this->getDateRange() as $key=>$range): ?>
+                    <option value="<?php echo $key ?>" <?php echo ($this->getValue('filter/range') == $key)? 'selected="selected"':''; ?>><?php echo $range['name'] ?></option>
+                <?php endforeach; ?>
+                    <option value="alltime" <?php echo ($this->getValue('filter/range') == 'alltime')? 'selected="selected"':''; ?>><?php echo Mage::helper('aitreports')->__("All Time Range") ?></option>
+                    <option value="custom" <?php echo ($this->getValue('filter/range') == '' || $this->getValue('filter/range') == 'custom')? 'selected="selected"':''; ?>><?php echo Mage::helper('aitreports')->__("Custom Date Range") ?></option>
+                </select>
+            </span>
+        <span class="field-row">
+            <label for="filterDateFrom"><?php echo Mage::helper('aitreports')->__("Order Date") ?></label>
+            <?php echo Mage::helper('aitreports')->__('From') ?>:&nbsp;<input class="inputElement input-text no-changes validate-customDate" type="text" id="filterDateFrom" name="filter[date_from]" 
+                          value="<?php echo $this->getValue('filter/date_from') ? strftime($this->getShortDateFormat(), strtotime($this->getValue('filter/date_from'))) : '' ?>" style="width:5em" /> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" title="<?php echo Mage::helper('aitreports')->__('Select Date') ?>" id="filterDateFromTrig" alt="<?php echo Mage::helper('aitreports')->__('Select Date') ?>" class="v-middle"/>&nbsp;&nbsp;
+            <?php echo Mage::helper('aitreports')->__('To') ?>:&nbsp;<input  class="inputElement input-text no-changes validate-customDate" type="text" id="filterDateTo" name="filter[date_to]"  
+                           value="<?php echo $this->getValue('filter/date_to') ? strftime($this->getShortDateFormat(), strtotime($this->getValue('filter/date_to'))) : '' ?>" style="width:5em" /> <img src="<?php echo $this->getSkinUrl('images/grid-cal.gif') ?>" class="v-middle" title="<?php echo Mage::helper('aitreports')->__('Select Date') ?>"id="filterDateToTrig" alt="<?php echo Mage::helper('aitreports')->__('Select Date') ?>"/>&nbsp;&nbsp;
+        </span>
+<input type=hidden id="localeDateFormat" value="<?php echo $this->getMediumDateFormat(); ?>" />
+    </fieldset>    
+    
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitreports')->__("File Information") ?></h4>
+    </div>
+    <fieldset>
+        <legend><?php echo Mage::helper('aitreports')->__("File Information") ?></legend>
+        <div class="profile_data_transfer_file">
+            <span class="field-row">
+                <label for="fileType"><?php echo Mage::helper('aitreports')->__("Type:") ?></label>
+                <select id="fileType" name="file[type]" onchange="showOption(this)" class="option-control">
+                    <option value="file" <?php echo $this->getSelected('file/type', 'file') ?>><?php echo Mage::helper('aitreports')->__("Local Server") ?></option>
+                    <option value="ftp" <?php echo $this->getSelected('file/type', 'ftp') ?>><?php echo Mage::helper('aitreports')->__("Remote FTP") ?></option>
+                    <option value="email" <?php echo $this->getSelected('file/type', 'email') ?>><?php echo Mage::helper('aitreports')->__("Email") ?></option>
+                </select>
+            </span>
+            <span class="field-row">
+                <label for="fileFilename"><?php echo Mage::helper('aitreports')->__("File prefix:") ?></label>
+                <span class="with-tip">
+                    <input class="input-text" id="fileFilename" name="file[filename]" value="<?php echo $this->getValue('file/filename') ?>"/>
+                    <small>
+                        <?php echo Mage::helper('aitreports')->__('Order export date and time will be added to this file name to avoid file overwriting') ?>
+                    </small>
+                </span>
+            </span>
+            <div class="fileType_file">
+                <span class="field-row">
+                <label for="filePath"><?php echo Mage::helper('aitreports')->__("Path:") ?><span class="required">*</span></label>
+                    <span class="with-tip required-optional">
+                        <input class="input-text required-entry" id="filePath" name="file[path]" value="<?php echo $this->getPathValue() ?>"/>
+                        <small>
+                            <?php echo Mage::helper('aitreports')->__('Absolute path or Relative to Magento install root, ex. var/smartreports') ?>
+                        </small>
+                    </span>
+                </span>
+            </div>
+            <div class="fileType_ftp">
+                <span class="field-row">
+                <label for="ftpPath"><?php echo Mage::helper('aitreports')->__("Path:") ?></label>
+                    <input class="input-text" id="ftpPath" name="ftp[path]" value="<?php echo $this->getValue('ftp/path') ?>"/>
+                </span>
+                <span class="field-row required-optional">
+                    <label for="ftpHost"><?php echo Mage::helper('aitreports')->__("FTP Host[:Port]") ?><span class="required">*</span></label>
+                    <input class="input-text required-entry" id="ftpHost" name="ftp[host]" value="<?php echo $this->getValue('ftp/host') ?>"/>
+                </span>
+                <span class="field-row required-optional">
+                    <label for="ftpUser"><?php echo Mage::helper('aitreports')->__("User name") ?><span class="required">*</span></label>
+                    <input class="input-text required-entry" id="ftpUser" name="ftp[user]" value="<?php echo $this->getValue('ftp/user') ?>"/>
+                </span>
+                <span class="field-row">
+                    <label for="ftpPassword"><?php echo Mage::helper('aitreports')->__("Password") ?></label>
+                    <input class="input-text" type="password" id="ftpPassword" name="ftp[password]" value="<?php echo $this->getValue('ftp/password') ?>"/>
+                </span>
+                <span class="field-row">
+                    <label for="ftpPassive"><?php echo Mage::helper('aitreports')->__("Passive mode") ?></label>
+                    <select id="ftpPassive" name="ftp[passive]">
+                        <option value="" <?php echo $this->getSelected('ftp/passive', false) ?>><?php echo Mage::helper('aitreports')->__("No") ?></option>
+                        <option value="true" <?php echo $this->getSelected('ftp/passive', true) ?>><?php echo Mage::helper('aitreports')->__("Yes") ?></option>
+                    </select>
+                </span>
+            </div>
+            <div class="fileType_email">
+                <span class="field-row required-optional">
+                    <label for="emailSendto"><?php echo Mage::helper('aitreports')->__("Send to") ?><span class="required">*</span></label>
+                    <input class="input-text validate-email" id="emailSendto" name="email[sendto]" value="<?php echo $this->getValue('email/sendto') ?>" />
+                </span>
+                <span class="field-row">
+                    <label for="emailSender"><?php echo Mage::helper('aitreports')->__("Email sender") ?></label>
+                    <select id="emailSender" name="email[sender]">
+                    <?php foreach ($this->getEmailSenders() as $sender): ?>
+                            <option value="<?php echo $sender['value'] ?>" <?php echo $this->getSelected('email/sender', $sender['value']) ?>><?php echo $this->htmlEscape($sender['label']) ?></option>
+                    <?php endforeach ?>
+                    </select>
+                </span>
+                <span class="field-row">
+                    <label for="emailTemplate"><?php echo Mage::helper('aitreports')->__("Email template") ?></label>
+                    <?php 
+                    echo $this->getLayout()->createBlock('core/html_select')
+                        ->setOptions($this->getEmailTemplates())
+                        ->setValue(isset($_config['email']['template']) ? $_config['email']['template'] : false)
+                        ->setId('emailTemplate')
+                        ->setName('email[template]')
+                        ->toHtml() 
+                    ?>
+                </span>
+            </div>
+        </div>
+    </fieldset>
+            
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitreports')->__("Automatic export settings") ?></h4>
+    </div>
+    <fieldset>
+        <legend><?php echo Mage::helper('aitreports')->__("Export order") ?></legend>
+        <span class="field-row">
+            <label for="autoAfterCheckout"><?php echo Mage::helper('aitreports')->__("Export order") ?></label>
+            <?php 
+            echo $this->getLayout()->createBlock('core/html_select')
+                ->setOptions(array(
+                    array('value' => 0, 'label' => $this->__('Manually trough backend')), 
+                    array('value' => 3, 'label' => $this->__('Automatically by cron')), 
+                    ))
+                ->setValue(isset($_config['auto']['export_type']) ? $_config['auto']['export_type'] : 0)
+                ->setId('exportType')
+                ->setName('auto[export_type]')
+                ->toHtml();
+                //after_checkout after_invoice cron_frequency
+            ?>
+        </span>
+    </fieldset>
+
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('aitreports')->__("Cron settings") ?></h4>
+    </div>
+    <fieldset id="cron_settings_container">
+        <span class="field-row">
+            <label for="autoCronFrequency"><?php echo Mage::helper('aitreports')->__("Export by cron") ?></label>
+            <select id="autoCronFrequency" name="auto[cron_frequency]" class="inputElement">
+                <?php foreach ($this->getCronFrequency() as $item): ?>
+                <option value="<?php echo $item['value'] ?>" <?php echo $this->getSelected('auto/cron_frequency', $item['value']) ?>><?php echo $this->htmlEscape($item['label']) ?></option>
+                <?php endforeach ?>
+            </select>
+        </span>
+        <span class="field-row" id="autoCronBind">
+            <label for="autoBindOrderId"><?php echo Mage::helper('aitreports')->__("Export only orders which were not exported before") ?></label>
+            <?php 
+            echo $this->getLayout()->createBlock('core/html_select')
+                ->setOptions(array(
+                    array('value' => false, 'label' => $this->__('No')), 
+                    array('value' => 1, 'label' => $this->__('Yes')), 
+                    ))
+                ->setValue(isset($_config['auto']['bind_order_id']) ? $_config['auto']['bind_order_id'] : false)
+                ->setExtraParams('onchange="bindOrderIdFrom()"')
+                ->setId('autoBindOrderId')
+                ->setClass('inputElement')
+                ->setName('auto[bind_order_id]')
+                ->toHtml() 
+            ?>
+        </span>
+        <?php if($this->isOrdersExported()): ?>
+        <span class="field-row">
+            <label for="clearQueue"><?php echo Mage::helper('aitreports')->__("Clear export queue") ?></label>
+            <input type="checkbox" name="clear_queue" id="clearQueue" value="1" class="inputElement" />
+            <small>
+                <?php echo Mage::helper('aitreports')->__('Current profile has been executed and some orders are already exported. If you want to start the queue from the begin you should set the checkbox.') ?>
+            </small>
+        </span>
+        <?php endif; ?>
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+function aitExportOnSelect(cal)
+{
+    var el = $('exportType');
+    if(el.value == 2 || el.value == 1) {
+        return false;
+    }
+    var p = cal.params;
+    $('filterRange').value = 'custom';
+    var update = (cal.dateClicked || p.electric);
+    if (update && p.inputField) {
+        p.inputField.value = cal.date.print(p.ifFormat);
+        if (typeof p.inputField.onchange == "function")
+            p.inputField.onchange();
+        if (typeof fireEvent == 'function')
+            fireEvent(p.inputField, "change");
+    }
+    if (update && p.displayArea)
+        p.displayArea.innerHTML = cal.date.print(p.daFormat);
+    if (update && typeof p.onUpdate == "function")
+        p.onUpdate(cal);
+    if (update && p.flat) {
+        if (typeof p.flatCallback == "function")
+            p.flatCallback(cal);
+    }
+    if (update && p.singleClick && cal.dateClicked)
+        cal.callCloseHandler();
+}
+
+    Calendar.setup({
+        inputField : "filterDateFrom",
+        ifFormat : "<?php echo $this->getShortDateFormat() ?>",
+        button : "filterDateFromTrig",
+        align : "Bl",
+        onSelect: aitExportOnSelect,
+        singleClick : true
+    });
+    Calendar.setup({
+        inputField : "filterDateTo",
+        ifFormat : "<?php echo $this->getShortDateFormat() ?>",
+        button : "filterDateToTrig",
+        align : "Bl",
+        onSelect: aitExportOnSelect,
+        singleClick : true
+    });
+
+function displayElementIfSelected(selectId, elementId)
+{
+    if ($(selectId).value)
+    {
+        $(elementId).show();
+    }
+    else
+    {
+        $(elementId).hide();
+    }
+}
+
+function automaticExportUpdate()
+{
+    var el = $('exportType');
+    if(el.value == 3) {
+        toggleInputs('cron_settings_container', true);
+    } else {
+        toggleInputs('cron_settings_container', false);
+    }
+    if(el.value == 2 || el.value == 1) {
+        toggleInputs('filters_container', false);
+    } else {
+        toggleInputs('filters_container', true);
+    }
+}
+
+function toggleInputs(id, activate)
+{
+    $$('#'+id+' .inputElement').each(function(el){
+        if(activate) el.enable()
+        else el.disable();
+    });
+}
+
+$('exportType').observe('change', function() {automaticExportUpdate();});
+automaticExportUpdate();
+setDate($('filterRange'));
+
+$$('select.option-control').each(showOption);
+
+function bindOrderIdFrom()
+{
+    if($('autoBindOrderId').value)
+    {
+        $('filterOrderIdFrom').value = $('lastExportedOrderId').title;    
+    }
+}
+
+</script>

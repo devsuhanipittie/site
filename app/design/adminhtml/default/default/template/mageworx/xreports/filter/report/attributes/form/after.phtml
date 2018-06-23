@@ -1,0 +1,21 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<?php
+/* @var $this Mage_Core_Block_Template */
+
+$parentBlock = $this->getParentBlock();
+/* @var $parentBlock MageWorx_Xreports_Block_Filter_Report_Attributes_Form */
+?>
+<script type="text/javascript">
+    new DependentList('<?php echo $parentBlock->getForm()->getHtmlIdPrefix() . $parentBlock::SELECT_ID_MASTER ?>', 
+        '<?php echo $parentBlock->getForm()->getHtmlIdPrefix() . $parentBlock::SELECT_ID_SLAVE ?>',
+        <?php echo $parentBlock->getDependencyDataJson(); ?>);
+</script>

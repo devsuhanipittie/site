@@ -1,0 +1,17 @@
+<?php $column = $this->getColumn();
+$_idx = $this->getId();
+?>
+
+<form id="advr-order-to-plain-<?php echo $_idx; ?>" action="<?php echo Mage::getModel('adminhtml/url')->getUrl('*/*/plain'); ?>" method="post" target="_blank">
+    <input type="hidden" name="orders" value="<?php  echo $column->getOrders(); ?>"/>
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+    <a href="javascript:void(0);" onclick="document.getElementById('advr-order-to-plain-<?php echo $_idx; ?>').submit();"><?php echo Mage::helper('advr')->__('View orders') ?></a>
+</form>
+<br>
+<?php if ($column->getInvoices()): ?>
+    <form id="advr-invoice-to-plain-<?php echo $_idx; ?>" action="<?php echo Mage::getModel('adminhtml/url')->getUrl('*/*/invoices'); ?>" method="post" target="_blank">
+        <input type="hidden" name="invoices" value="<?php  echo $column->getInvoices(); ?>"/>
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+        <a href="javascript:void(0);" onclick="document.getElementById('advr-invoice-to-plain-<?php echo $_idx; ?>').submit();"><?php echo Mage::helper('advr')->__('View invoices') ?></a>
+    </form>
+<?php endif ?>

@@ -1,0 +1,270 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title> Installation Manual :: Magento Themes &amp; Magento Templates Home :: Templates-Master.com</title>
+<link rel="stylesheet" type="text/css" href="http://templates-master.com/skin/frontend/default/t4m/css/print.css" media="print" />
+<style type="text/css">
+body {
+	-x-system-font:none;
+	background:#fff;
+	color:#2F2F2F;
+	font-family: helvetica, verdana, sans-serif;
+	font-size:11px;
+	line-height:1.55em;
+	padding-boblockquoteom: 50px;	
+}
+
+html {
+	min-height:100%;
+}
+
+form, input {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+td , p,  a, span, div, li {
+	font: 11px Tahoma,  Helvetica, sans-serif;
+}
+a {
+	text-decoration: none;
+	color: #0B75A7;
+	outline: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a img {
+	border: none;
+}
+
+blockquote{
+	background: #c5e0ec;
+	padding: 4px 10px;
+	border: 1px dotted #1d87b7;
+	display: block;
+}
+
+textarea{
+	background: none;
+	border: none;
+	width: 100%;
+	font: 11px Tahoma, Verdana, Helvetica, sans-serif;	
+}
+
+p {
+	font: 11px Tahoma, Verdana, Helvetica, sans-serif;
+	padding: 0px;
+	
+}
+h1, h2, h3, h4, h6 {
+	padding: 0px;	
+	font-family:  Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+h1 {font-size: 19px; color: #5184B6;}
+h2 {font-size: 17px; color: #5184B6;}
+h3 {font-size: 15px; color: #5184B6;}
+h4, h5, h6 {font-size: 12px;}
+.catalog-product-view #maincolumn h4 {background:transparent url(../images/hline.gif) repeat-x scroll left boblockquoteom; color: #5FA2CB; margin-top: 10px !important; line-height: 18px;}
+
+ul, li {
+	margin: 5px 30px;;
+	padding: 0px;
+}
+
+.footerc, .footerl{
+	padding: 5px;
+	text-align: right;
+}
+
+.footerc, .footerl, .footerc *, .footerl *{
+	color: #fff;
+}
+
+.footerc{
+	width: 180px;
+	float: left;
+}
+
+.footerl{
+	width: 380px;
+	float: right;
+}
+.headerc{
+	color: #ffffff;
+	font-size:13px;
+	line-height: 24px;
+	padding: 5px;	
+}
+
+.fright{
+	float: right;
+	font-weight: bold;
+}
+
+
+</style>
+</head>
+<body>
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="1" cellspacing="0" width="800"><tbody>
+	<tr>
+		<td>
+			<table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="800"><tbody>
+				<tr>
+					<td>
+						<a href="http://templates-master.com/"><img src="images/logo.gif" border="0"></a>
+					</td>
+				</tr>
+				<tr>
+					<td  bgcolor="#0B75A7">
+						<div class="headerc">Magento Themes &amp; Magento Templates Home :: #1 Source for Magento Themes &amp; Magento Templates</div>
+					</td>
+				</tr>
+			</tbody></table><br>
+		</td>
+	</tr>
+</tbody></table>
+
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="1" cellspacing="0" width="800"><tbody>
+	<tr>
+		<td>
+			<table align="center"><tbody>
+				<tr>
+					<td>
+
+<p>Thank you for downloading our extension. Please follow these instructions to proceed with the installation of your extension:</p>
+
+<h3>#1 Installation:</h3>
+
+<ol>
+	<li>Copy all files into your magento directory and turn Magento cache off.</li>
+	<li>In case you have different then "default" default folder - copy extensions folders to your default theme</li>
+	<li>Navigate to System > Configuration > Templates-Master > Fire Checkout and enable extension for any store you need.</li>
+	<li>Configure Fire Checkout module according to your needs.</li>
+
+	<li>If you are planning to use Geo-Ip detection:
+		<ul>
+			<li>Country: <a title="Download GeoIP database" href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz">Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it</li>
+			<li>City: <a title="Download GeoCity database" href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz">Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it</li>
+		</ul>
+	</li>
+    
+    <li>
+        Firecheckout allows to leave customer order comments. If you wish to send this comment in the order notification email you need to edit the email templates (New Order and New Order for Guest):
+        <ul>
+            <li>Go to Sytem > Transactional emails and create two new templates</li>
+            <li>In the Template dropdown select New Order (New Order Guest)</li>
+            <li>Press Load template button</li>
+            <li>Fill the template name field with Firecheckout New Order (Firecheckout New Order Guest)</li>
+            <li>In the Template Content field add the following code in the desired position. (Before &lt;p style="font-size:12px; line-height:16px; margin:0;"&gt;Your order confirmation is below. Thank you again for your business.&lt;/p&gt; for example.)
+                <blockquote><textarea rows="3">
+{{depend order.getFirecheckoutCustomerComment()}}
+ <p style="font-size:12px; line-height:16px; margin:0;">Order Comment: {{htmlescape var=$order.getFirecheckoutCustomerComment()}}</p>
+{{/depend}}</textarea></blockquote>
+            </li>
+            <li>Press Save Template button</li>
+            <li>Do the same operations to create template for guests</li>
+            <li>Navigate to System > Configuration > Sales Email > Order</li>
+            <li>Set the New Order New Order Confirmation Template and New Order Confirmation Template for Guest dropdowns to newly created templates</li>
+            <li>Save the configuration</li>
+        </ul>
+    </li>
+    
+    <li>
+        Firecheckout 2.0 and newer allows to leave order delivery date and time. If you wish to send this information in the order notification email you need to edit the email templates (New Order and New Order for Guest):
+        <ul>
+            <li>Do everything from the previous step except the code to be inserted into email template.</li>
+            <li>In the Template Content field add the following code in the desired position.
+                <blockquote><textarea rows="7">
+{{depend order.getFirecheckoutDeliveryDate()}}
+ <p style="font-size:12px; line-height:16px; margin:0;">Delivery Date: {{htmlescape var=$order.getFirecheckoutDeliveryDate()}}</p>
+{{/depend}}
+{{depend order.getFirecheckoutDeliveryTimerange()}}
+ <p style="font-size:12px; line-height:16px; margin:0;">Delivery Time: {{htmlescape var=$order.getFirecheckoutDeliveryTimerange()}}</p>
+{{/depend}}</textarea></blockquote>
+            </li>
+        </ul>
+    </li>
+
+	<li>That's all. Your clients can buy the products in the new convenient checkout module.</li>
+</ol>
+
+<h3>#2 Configuration</h3>
+						
+<h6>General:</h6>
+	<ul>
+		<li>Enabled - enable or disable extension for separate store;</li>
+		<li>Page Title - Checkout page title;</li>
+		<li>Default Shipping Method - Selected shipping method by default;</li>
+		<li>Default Payment Method - Selected payment method by default;</li>
+		<li>Default Country - Selected country by default;</li>
+		<li>Registration mode - You can the mode to: Guest checkout to allowed, Registration is required or User is registered during checkout without prompting a password;</li>
+        <li>Register customer during Paypal Express checkout if prompted - Magento doesn't create new account during Paypal Express checkout even if customer selected registration mode and fill the password fields. We've add a small fix to change this behaviour. Now customer will be registered if he wanted to;</li>
+		<li>Show Shipping Address Form - You can hide shipping address if you don't need to ask it;</li>
+		<li>Show Subscribe to Newsletter Checkbox - Customer can subscribe to your newsletter during checkout;</li>
+		<li>Show Comment Field - Allows customers to leave their order comments;</li>
+        <li>Show Discount Coupon Field - Allows customers to use the coupon code during checkout process;</li>
+        <li>Redirect to firecheckout after adding an item to the shopping cart - Magento redirects customers to the shopping cart after adding the item. This option allows you to redirect user directly to the firecheckout page</li>
+	</ul>		
+
+<h6>GeoIP:</h6>
+	<ul>
+		<li>Enable Country Detection - detect customer country</li>
+		<li>GeoIp filename - .dat file. <a title="Download GeoIP database" href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz">Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it</li>
+        <li>Enable Region Detection - detect customer region</li>
+		<li>GeoIp filename - .dat file. Purchase and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it</li>
+		<li>Enable City Detection - detect customer city, postcode</li>
+		<li>GeoCity filename - .dat file. <a title="Download GeoCity database" href="http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz">Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it</li>
+	</ul>
+
+<h6>Address Form Fields:</h6>
+	<ul>
+		<li>You can do the field required, optional, or remove it from form</li>
+	</ul>
+    
+<h6>Ajax:</h6>
+	<ul>
+		<li>Reload order totals on zip code change - if you don't have any specific taxes for the particular zip, you can disable it</li>
+        <li>Reload order totals on region change - if you don't have any specific taxes for the particular region, you can disable it</li>
+        <li>Reload order totals on payment method change - if you have some discounts, that applied for particular payment method, enable it</li>
+        <li>Reload shipping methods on country change - If you don't use various shippings for various countries - disable it</li>
+        <li>Reload payment methods on country change - If you don't use various payments for various countries - disable it</li>
+	</ul>
+
+<h6>Terms and Conditions:</h6>
+	<ul>
+		<li>Enable Terms and Conditions - show terms and conditions</li>
+        <li>Output Type - Minimal type is using lightbox-like window</li>
+	</ul>
+
+<h6>Firecheckout on mobile devices:</h6>
+	<ul>
+		<li>You can disable the module for mobile devices</li>
+	</ul>
+	
+<p>If you have any problems with extension installation please contact us at <a href="http://templates-master.com/contacts/">templates-master.com/contacts/</a>.</p>
+
+<p class="fright">Sincerely, Templates Master Team</p>
+				
+					
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+
+<table align="center" bgcolor="#ffffff" border="0" cellpadding="1" cellspacing="0" width="800"><tbody>
+	<tr>
+		<td  bgcolor="#0B75A7">
+			<div class="footerc">Copyright © 2009 <a href="http://templates-master.com/">Templates Master</a></div>
+			<div class="footerl">
+				<a href="http://templates-master.com/">Templates Master</a>&nbsp;|&nbsp;
+				<a href="http://templates-master.com/downloads-and-returns/">Downloads & Returns</a>&nbsp;|&nbsp;
+				<a href="http://templates-master.com/contacts/">Contact us</a>
+			</div>
+		</td>
+	</tr>
+</tbody></table>
+
+</body>
+</html>

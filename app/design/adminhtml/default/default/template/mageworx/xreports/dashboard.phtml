@@ -1,0 +1,46 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<div class="xreports-dashborad">
+    <div class="content-header">
+        <table cellspacing="0">
+            <tr>
+                <td><h3 class="head-dashboard"><?php echo $this->__('Dashboard') ?></h3></td>
+                <td><?php echo $this->getChildHtml('dashboard-switcher'); ?><?php echo $this->getChildHtml('refresh_button'); ?></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <?php echo $this->getChildHtml('store.switcher') ?>
+    </div>
+
+    <div class="dashboard-tab-container">
+        <span class="dashboard-tab-title"><?php echo $this->__('Lifetime Statistics') ?></span>
+        <span class="dashboard-orange-slash">/</span>
+        <?php echo $this->getChildHtml('lifetimeStats'); ?>
+    </div>
+
+    <div class="dashboard-tab-separator"></div>
+
+    <div class="dashboard-tab-container">
+        <span class="dashboard-tab-title"><?php echo $this->__('Periodic Statistics') ?></span>
+        <span class="dashboard-orange-slash">/</span>
+        <?php echo $this->getChildHtml('filter') ?>
+        <?php echo $this->getChildHtml('periodicStats'); ?>
+    </div>
+
+    <div class="dashboard-tab-separator"></div>
+
+    <div class="dashboard-tab-container">
+        <?php echo $this->getChildHtml('totals'); ?>
+    </div>
+
+
+</div>

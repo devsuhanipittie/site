@@ -1,0 +1,10 @@
+/* Filter block
+*************************************************/
+#xreports-filter-form-from, #xreports-filter-form-to, #xreports-filter-form-from_compare, #xreports-filter-form-to_compare, #xreports-filter-form-period_type {
+    background-color: #9D9E9E !important;
+    border-color: #9D9E9E;
+    color: #ffffff;
+}
+.dashboard-tab-container {
+    background-color: #727271;
+}

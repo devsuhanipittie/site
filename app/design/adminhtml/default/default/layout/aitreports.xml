@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_aitreports_index_index>
+        <reference name="head">
+            <action method="addJs"><name>aitreports/processor.js</name></action>
+            <action method="addJs"><name>aitreports/validateCustomDate.js</name></action>
+        </reference>
+    </adminhtml_aitreports_index_index>
+</layout>

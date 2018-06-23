@@ -1,0 +1,21 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<?php if(!empty($tabs)): ?>
+<ul id="<?php echo $this->getId() ?>" class="dashboard-tab-items-container">
+    <?php foreach ($tabs as $_tab): ?>
+    <li class="dashboard-lifetime__item">
+        <span class="dashboard-lifetime-item__title"><?php echo $this->getTabLabel($_tab) ?>:</span>
+        <span class="dashboard-lifetime-item__value"><?php echo $_tab->getTabLabelNote() ?></span>
+    </li>
+    <?php endforeach; ?>
+</ul>
+<?php endif; ?>

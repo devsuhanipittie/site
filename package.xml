@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>PayU-payment-gateway</name>
+    <version>1.0.0</version>
+    <stability>devel</stability>
+    <license>PayU v1.0</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>PayU Payment Gateway</summary>
+    <description>PayU Payment Gateway</description>
+    <notes>you can use this extension for integrating PayU payment gateway</notes>
+    <authors><author><name>Ramakant</name><user>ramakant2you</user><email>ramakant2you@gmail.com</email></author></authors>
+    <date>2011-12-27</date>
+    <time>10:59:17</time>
+    <contents><target name="magecommunity"><dir name="Payu"><dir name="PayuCheckout"><dir name="Block"><dir name="Shared"><file name="Canceled.php" hash="bb19a12f92b3f4813dfbea0b39d54239"/><file name="Failure.php" hash="08abafbca12b0b90026f868f94baff29"/><file name="Form.php" hash="1910d6be84e75325aea85821133ce73c"/><file name="Redirect.php" hash="62bd8f284ca07038f11b81ddcdefe1ff"/></dir></dir><dir name="Controller"><file name="Abstract.php" hash="35e4b83aa3aed060125fbeb653192b4f"/></dir><dir name="Helper"><file name="Data.php" hash="896c95a620ad4ecc5aaa93e157e369fb"/></dir><dir name="Model"><dir name="Api"><file name="Debug.php" hash="b841c48492958030919d40f1e106755c"/></dir><dir name="Mysql4"><dir name="Api"><dir name="Debug"><file name="Collection.php" hash="f6c9e33b04b46242737204488fcd9081"/></dir><file name="Debug.php" hash="7d02543559f7d7cca60d8339898ad76b"/></dir><file name="Setup.php" hash="a03cdaf2dda7cb47e5cab334aa15cebd"/></dir><file name="Shared.php" hash="a13530746c7ff6adb8bf0317e9baf27e"/><dir name="Source"><file name="DemoModes.php" hash="3bd1cc16836adecb9d29a55ba9d3bffc"/><file name="DirectReturn.php" hash="be10b40fe41199d36d1d49c1e1af59cb"/><file name="PaymentRoutines.php" hash="5e6e78e13cf245c790762bf5e754fad3"/></dir></dir><dir name="controllers"><file name="SharedController.php" hash="a4979e849b15b46ff7d5133b2a4c43b8"/><file name="SharedController26.php" hash="2af9a71dc45c8e7f6c3a7c731dce8b25"/></dir><dir name="etc"><file name="config.xml" hash="8d61170d5acbebf04feefffd6e00b468"/><file name="system.xml" hash="f4c823828cb787d107c6e204f4342226"/></dir><dir name="sql"><dir name="payucheckout_setup"><file name="mysql4-install-0.1.0.php" hash="e551af7989f2bdca0e863ccdd14cfa56"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="default"><dir name="default"><dir name="template"><dir name="payucheckout"><file name="form.phtml" hash="68b329da9893e34099c7d8ad5cb9c940"/><file name="info.phtml" hash="d41d8cd98f00b204e9800998ecf8427e"/><dir name="shared"><file name="canceled.phtml" hash="bdef89131c08a83d3c1742399d58b433"/><file name="failure.phtml" hash="a54ece778621c5e2b35f4983923bfeb3"/><file name="form.phtml" hash="f8f62958bac1bf15fde40ed24078d97f"/></dir></dir></dir><dir name="layout"><file name="payucheckout.xml" hash="c77d92a6c0a9fe598e61525658382fe6"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Payu_PayuCheckout.xml" hash="284666c8d3fdb0742ceb390ee7081e80"/></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

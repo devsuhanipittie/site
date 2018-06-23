@@ -1,0 +1,55 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<?php if(!empty($tabs)): ?>
+<ul id="<?php echo $this->getId() ?>" class="dashboard-tab-items-container-horiz" style="background-color: #727271">
+    <?php foreach ($tabs as $_tab): ?>
+    <li class="dashboard-periodic__item">
+        <a href="<?php echo $this->getTabUrl($_tab)?>" id="<?php echo $this->getTabId($_tab) ?>" title="<?php echo $this->getTabTitle($_tab) ?>" class="tab-item-link <?php echo $this->getTabClass($_tab) ?><?php if (preg_match('/\s?ajax\s?/', $this->getTabClass($_tab))) {?> notloaded<?php }?>">
+            <div class="dashboard-periodic-item">
+                <div class="dashboard-periodic-item__left-content">
+                    <div class="periodic-tab-img tab-img-<?php echo $_tab->getTabAlias() ?>" id="periodic__img-<?php echo $_tab->getTabAlias() ?>"></div>
+                    <div class="dashboard-periodic-item__basic-title"><?php echo $this->getTabLabel($_tab) ?></div>
+                </div>
+                <div class="dashboard-periodic-item__right-content">
+                    <div class="dashboard-item-content__wrap">
+                        <div class="dashboard-periodic-item__basic-value"><?php echo $_tab->getTabLabelNote() ?></div>
+                        <div class="periodic__arrow-no"></div>
+                    </div>
+                    <div class="dashboard-periodic-item__advanced-values"></div>
+                </div>
+                <div class="xreports_tab_content" id="<?php echo $this->getTabId($_tab) ?>_content" style="display:none" ><?php echo $this->getTabContent($_tab) ?></div>
+            </div>
+        </a>
+    </li>
+
+        <script type="text/javascript">
+            $('<?php echo $this->getTabId($_tab) ?>').observe('click', function(event) {
+                var tab_<?php echo $_tab->getTabAlias() ?> = document.getElementById('periodic__img-<?php echo $_tab->getTabAlias() ?>');
+                if (tab_<?php echo $_tab->getTabAlias() ?> != null) {
+                    $$('.periodic-tab-img').each(
+                        function (index) {
+                            index.removeClassName('active-tab');
+                        }
+                    );
+                    tab_<?php echo $_tab->getTabAlias() ?>.className = 'periodic-tab-img tab-img-<?php echo $_tab->getTabAlias() ?> active-tab';
+                }
+            });
+        </script>
+
+    <?php endforeach; ?>
+</ul>
+<script type="text/javascript">
+    <?php echo $this->getJsObjectName() ?> = new varienTabs('<?php echo $this->getId() ?>', '<?php echo $this->getDestElementId() ?>', '<?php echo $this->getActiveTabId() ?>', <?php echo $this->getAllShadowTabs()?>);
+</script>
+<?php endif; ?>
+<div class="clear"></div>
+<div id="<?php echo $this->getDestElementId() ?>"></div>

@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<layout>
+    <!--    Handler updates    -->
+    <mageworx_xreports_head>
+        <reference name="head">
+            <!-- Use prototype.js v1.7.2 -->
+            <!-- This line is a marker for prototype.js replacement.-->
+            <!-- It will be deleted in MageWorx_Xreports_Model_Observer::modifyHeadHtml() -->
+            <action method="addJs"><script>mageworx/prototype.js</script></action>
+
+            <action method="addJs"><script>mageworx/datepickr.min.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/mageworx/xreports/filter.js</name></action>
+
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/styles.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/datepickr.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/nv.d3.css</name></action>
+        </reference>
+    </mageworx_xreports_head>
+    <mageworx_xreports_dashboard_custom_head>
+        <reference name="head">
+            <action method="addJs"><script>mageworx/d3.min.js</script></action>
+            <action method="addJs"><script>mageworx/nv.d3.min.js</script></action>
+        </reference>
+    </mageworx_xreports_dashboard_custom_head>
+    <mageworx_xreports_reports_custom_head>
+        <reference name="head">
+            <action method="addJs"><script>mageworx/d3-3.5.6.min.js</script></action>
+            <action method="addJs"><script>mageworx/nv.d3-1.8.1.min.js</script></action>
+        </reference>
+    </mageworx_xreports_reports_custom_head>
+    <mageworx_xreports_product_head>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/mageworx/xreports/product.js</name></action>
+        </reference>
+    </mageworx_xreports_product_head>
+    <mageworx_xreports_dashboard_head>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/mageworx/xreports/dashboard.js</name></action>
+        </reference>
+    </mageworx_xreports_dashboard_head>
+
+    <!--    Dashboard    -->
+    <adminhtml_dashboard_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/styles.css</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/dashboard.css</name></action>
+        </reference>
+    </adminhtml_dashboard_index>
+
+    <mageworx_xreports_extended_dashboard>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/dashboard.css</name></action>
+        </reference>
+        <reference name="store_switcher">
+            <action method="setTemplate"><template>report/store/switcher/enhanced.phtml</template></action>
+            <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+        </reference>
+        <reference name="content">
+            <remove name="dashboard" />
+            <block type="mageworx_xreports/adminhtml_dashboard" name="mageworx_xreports.dashboard">
+                <block type="mageworx_xreports/adminhtml_dashboard_switch" name="dashboard-switcher" after="-"></block>
+                <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                    <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+                </block>
+            </block>
+        </reference>
+        <reference name="root">
+            <action method="addBodyClass"><var_name>mageworx-xreports-extended-dashboard</var_name></action>
+        </reference>
+    </mageworx_xreports_extended_dashboard>
+
+    <adminhtml_mageworx_xreports_dashboard_orders>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_dashboard_orders" name="mageworx_xreports.chart.dashboard_orders"/>
+        </block>
+    </adminhtml_mageworx_xreports_dashboard_orders>
+
+    <adminhtml_mageworx_xreports_dashboard_revenue>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_dashboard_revenue" name="mageworx_xreports.chart.dashboard_revenue"/>
+        </block>
+    </adminhtml_mageworx_xreports_dashboard_revenue>
+
+    <adminhtml_mageworx_xreports_dashboard_aov>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_dashboard_aov" name="mageworx_xreports.chart.dashboard_aov"/>
+        </block>
+    </adminhtml_mageworx_xreports_dashboard_aov>
+
+    <adminhtml_mageworx_xreports_dashboard_conversion>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_dashboard_conversion" name="mageworx_xreports.chart.dashboard_conversion"/>
+        </block>
+    </adminhtml_mageworx_xreports_dashboard_conversion>
+
+    <adminhtml_mageworx_xreports_dashboard_visits>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_dashboard_visits" name="mageworx_xreports.chart.dashboard_visits"/>
+        </block>
+    </adminhtml_mageworx_xreports_dashboard_visits>
+    <!--    Dashboard End    -->
+
+    <!--    Product Edit    -->
+    <adminhtml_catalog_product_edit>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_dashboard_head"/>
+        <update handle="mageworx_xreports_dashboard_custom_head"/>
+        <update handle="mageworx_xreports_product_head"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/mageworx/xreports/dashboard.css</name></action>
+        </reference>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>mageworx_xreports_statistics</name>
+                <block>mageworx_xreports/adminhtml_catalog_product_edit_tab_statistics</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_mageworx_xreports_product_statistics>
+        <update handle="mageworx_xreports_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_catalog" name="mageworx_xreports.catalog"></block>
+            <block type="mageworx_xreports/adminhtml_xreports" name="mageworx_xreports.product_statistics" template="mageworx/xreports/product.phtml">
+                <block type="mageworx_xreports/adminhtml_catalog_product_edit_tab_statistics_table_total" name="mageworx_xreports.product.total.table"/>
+                <block type="mageworx_xreports/adminhtml_catalog_product_edit_tab_statistics_table_calculates" name="mageworx_xreports.product.calculates.table"/>
+            </block>
+        </block>
+    </adminhtml_mageworx_xreports_product_statistics>
+
+    <adminhtml_mageworx_xreports_product_revenue>
+        <update handle="mageworx_xreports_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_catalog_revenue" name="mageworx_xreports.chart.catalog_revenue"/>
+        </block>
+    </adminhtml_mageworx_xreports_product_revenue>
+
+    <adminhtml_mageworx_xreports_product_profit>
+        <update handle="mageworx_xreports_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_catalog_profit" name="mageworx_xreports.chart.catalog_profit"/>
+        </block>
+    </adminhtml_mageworx_xreports_product_profit>
+    <!--    Product Edit End    -->
+
+    <adminhtml_mageworx_xreports_product_massmargin>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>mageworx/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="apply" template="mageworx/xreports/product/mass_apply_margin.phtml" output="toHtml"/>
+        </block>
+    </adminhtml_mageworx_xreports_product_massmargin>
+
+    <adminhtml_mageworx_xreports_report_attributes>
+        <update handle="report_sales"/>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/mageworx/xreports/dynamicoptionlist.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="mageworx_xreports/adminhtml_report_sales_attributes" template="report/grid/container.phtml" name="attributes.report.grid.container">
+                <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                    <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+                </block>
+                <block type="mageworx_xreports/adminhtml_filter_report_attributes_form" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_mageworx_xreports_report_attributes>
+
+    <adminhtml_mageworx_xreports_report_categories>
+        <update handle="report_sales"/>
+        <reference name="content">
+            <block type="mageworx_xreports/adminhtml_report_sales_categories" template="report/grid/container.phtml" name="categories.report.grid.container">
+                <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                    <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+                </block>
+                <block type="mageworx_xreports/adminhtml_filter_report_categories_form" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+        </reference>
+    </adminhtml_mageworx_xreports_report_categories>
+
+    <adminhtml_mageworx_xreports_report_storeviewssales>
+        <update handle="mageworx_xreports_head"/>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx_xreports/adminhtml_chart_reports_sales_storeviews" name="mageworx_xreports.chart.reports.sales_storeviews"/>
+        </block>
+    </adminhtml_mageworx_xreports_report_storeviewssales>
+
+    <adminhtml_mageworx_xreports_report_storeviews>
+        <update handle="report_sales"/>
+        <update handle="mageworx_xreports_head"/>
+        <update handle="mageworx_xreports_reports_custom_head"/>
+        <update handle="mageworx_xreports_dashboard_head"/>
+        <reference name="content">
+            <block type="mageworx_xreports/adminhtml_report_sales_storeviews" template="report/grid/container.phtml" name="storeviews.report.grid.container">
+                <block type="mageworx_xreports/adminhtml_filter_report_storeviews_form" name="grid.filter.form">
+                    <action method="addReportTypeOption" translate="value">
+                        <key>created_at_order</key>
+                        <value>Order Created Date</value>
+                    </action>
+                    <action method="addReportTypeOption" translate="value">
+                        <key>updated_at_order</key>
+                        <value>Order Updated Date</value>
+                    </action>
+                    <action method="setFieldOption" translate="value">
+                        <field>report_type</field>
+                        <option>note</option>
+                        <value>Order Updated Date report is real-time, does not need statistics refreshing.</value>
+                    </action>
+                </block>
+            </block>
+            <block type="mageworx_xreports/adminhtml_reports" name="mageworx_xreports.reports"></block>
+        </reference>
+    </adminhtml_mageworx_xreports_report_storeviews>
+</layout>

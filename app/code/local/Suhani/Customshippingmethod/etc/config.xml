@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Suhani_Customshippingmethod>
+      <version>1.0</version>
+    </Suhani_Customshippingmethod>
+  </modules>
+  <global>
+    <models>
+      <suhani_customshippingmethod>
+        <class>Suhani_Customshippingmethod_Model</class>
+      </suhani_customshippingmethod>
+    </models>
+    <helpers>
+      <suhani_customshippingmethod>
+        <class>Suhani_Customshippingmethod_Helper</class>
+      </suhani_customshippingmethod>
+    </helpers>
+  </global>
+  <default>
+    <carriers>
+      <suhani_customshippingmethod>
+        <active>1</active>
+        <sallowspecific>1</sallowspecific>
+        <model>suhani_customshippingmethod/demo</model>
+        <name>Pick Up At Store</name>
+        <price>0.00</price>
+        <title>Demo Shipping Method</title>
+      </suhani_customshippingmethod>
+    </carriers>
+  </default>
+</config>
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Amazon_Amzpay>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Amazon_Amzpay>
+  </modules>
+</config>

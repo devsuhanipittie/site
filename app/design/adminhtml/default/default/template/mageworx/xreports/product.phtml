@@ -1,0 +1,21 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[
+    xreportsProduct = new MWXreportsProduct(product_info_tabsJsTabs, 'mageworx_xreports_statistics');
+    if (typeof(xreportsFilter) != 'undefined') {
+        xreportsFilter.setCallback(xreportsProduct.filterProductStatistics.bind(xreportsProduct));
+    }
+//]]>
+</script>
+
+<?php echo $this->getChildHtml('mageworx_xreports.product.total.table') ?>
+<?php echo $this->getChildHtml('mageworx_xreports.product.calculates.table') ?>

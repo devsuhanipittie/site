@@ -1,0 +1,30 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx Extended Reports Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_Xreports
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+
+<?php if(!empty($tabs)): ?>
+<ul id="<?php echo $this->getId() ?>" class="dashboard-tab-items-container-horiz">
+    <?php
+    $i = 0;
+    foreach ($tabs as $_tab):
+        if ($i) :
+            ?>
+            <li class="dashboard-goal-item__separator"><li>
+        <?php
+        endif;
+        $i++;
+        ?>
+    <li class="dashboard-goal-item">
+        <div class="dashboard-goal-item__title"><?php echo $this->getTabLabel($_tab) ?></div>
+        <div class="dashboard-goal-item__value"><?php echo $_tab->getTabLabelNote() ?></div>
+    </li>
+    <?php endforeach; ?>
+</ul>
+<?php endif; ?>
